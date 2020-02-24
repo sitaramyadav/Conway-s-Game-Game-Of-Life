@@ -1,17 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const SquareStyle = styled.div`
+export const Square = styled.div`
   width: 20px;
   height: 20px;
-  background-color: white;
-  ${props =>
-    props.color === "black" &&
-    css`
-      background-color: black;
-    `}
-`;
+  border: 1px solid black;
+  box-sizing: border-box;
 
-export const Square = ({ color }) => {
-  return <SquareStyle color={color} />;
-};
+  background-color: ${props => (props.isAlive ? "black" : "white")};
+`;

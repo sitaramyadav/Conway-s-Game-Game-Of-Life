@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Square } from "./Square";
 
@@ -16,25 +16,18 @@ const BoardStyle = styled.main`
   box-sizing: border-box;
 `;
 
-export const Board = () => {
-  const isEven = number => {
-    return number % 2 === 0;
-  };
-  const row = [];
+export const Board = ({ gameStatus }) => {
+  const board = [];
+  const isAlive = () => Math.random() > 0.7;
 
   const renderRow = () => {
     for (let i = 0; i < 40; i++) {
       for (let j = 0; j < 40; j++) {
-        if (isEven(i) && isEven(j)) {
-          //Todo: isEven needs to be converted into is isAlive;
-          row.push(<Square key={`${i},${j}`} color="black" />);
-        } else {
-          row.push(<Square key={`${i},${j}`} />);
-        }
+        board.push(<Square key={`${i},${j}`} isAlive={isAlive(i, j)} />);
       }
     }
 
-    return row;
+    return board;
   };
 
   return <BoardStyle>{renderRow()}</BoardStyle>;
