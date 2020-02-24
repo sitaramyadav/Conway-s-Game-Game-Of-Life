@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Board } from "./Board";
 const Header = styled.header`
   margin: 0;
   padding: 0;
@@ -14,7 +15,12 @@ const Header = styled.header`
 `;
 
 function App() {
-  return <Header>Game of life</Header>;
+  return (
+    <div>
+      <Header>Game of life</Header>
+      <Board />
+    </div>
+  );
 }
 
 export default App;
