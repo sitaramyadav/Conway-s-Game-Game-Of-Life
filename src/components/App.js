@@ -14,9 +14,14 @@ const Header = styled.header`
   align-items: center;
 `;
 const GameStatus = styled.button`
-  width: 90px;
+  width: 120px;
+  height: 50px;
+  font-size: 24px;
   background-color: black;
   color: white;
+  position: absolute;
+  top: 400px;
+  right: 200px;
 `;
 
 function App() {
@@ -28,7 +33,9 @@ function App() {
       <GameStatus
         onClick={() => setGameStatus(!gameStatus)}
         gameStatus={gameStatus}
-      />
+      >
+        {(gameStatus && "START") || "STOP"}
+      </GameStatus>
     </div>
   );
 }

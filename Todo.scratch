@@ -1,0 +1,10 @@
+              10: 15 AM to 10:40: AM;
+    
+1. Add Start/Stop button 
+2. handle onClick
+    1. Should update the game status from running to stop
+    2. Should update the status from stop to running.
+    3. Style it at fixed on the window right side of board.
+    4. Writ the tests.
+    
+
