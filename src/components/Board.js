@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Square } from "./Square";
 import { ROWS, COLOMS } from "../constants";
@@ -18,7 +18,6 @@ const BoardStyle = styled.main`
 `;
 
 export const Board = ({ boardStatus }) => {
-  console.log(boardStatus, "boardStatus");
   const renderRow = (tr = []) => {
     for (let row = 0; row < ROWS; row++) {
       const td = [];

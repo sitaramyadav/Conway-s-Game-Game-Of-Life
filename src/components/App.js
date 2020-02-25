@@ -25,7 +25,7 @@ const GameStatus = styled.button`
   color: white;
   position: absolute;
   top: 400px;
-  right: 200px;
+  right: 50px;
 `;
 
 const App = () => {
