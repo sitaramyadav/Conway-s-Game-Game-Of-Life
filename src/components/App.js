@@ -29,7 +29,7 @@ function App() {
   return (
     <div>
       <Header>Game of life</Header>
-      <Board />
+      <Board gameStatus={gameStatus} />
       <GameStatus
         onClick={() => setGameStatus(!gameStatus)}
         gameStatus={gameStatus}

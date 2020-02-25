@@ -6,5 +6,14 @@
     2. Should update the status from stop to running.
     3. Style it at fixed on the window right side of board.
     4. Writ the tests.
-    
+
+            11: 45 AM to 12: 30PM         
+3. Refactor the grid from an array to 2d array.
+    1. create the row
+    2. render the row given the n number of colum.
+    3. It should still render with random alive cell.
+    4. Use table row and colom to create the grid.
+    5. style the table as it is looking right now.
+
+
 

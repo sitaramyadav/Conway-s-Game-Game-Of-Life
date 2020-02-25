@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-export const Square = styled.div`
+export const Square = styled.td`
   width: 20px;
   height: 20px;
   border: 1px solid black;
