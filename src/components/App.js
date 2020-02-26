@@ -37,7 +37,7 @@ const App = () => {
   });
   const [timerID, setTimerID] = useState(null);
 
-  const handleStep = () => {
+  const handleFutureGeneration = () => {
     setState({
       ...state,
       boardStatus: getFutuerGeneration(state.boardStatus),
@@ -48,14 +48,14 @@ const App = () => {
   useEffect(() => {
     clearInterval(timerID);
     const _timerID = setInterval(() => {
-      handleStep();
+      handleFutureGeneration();
     }, 500);
     setTimerID(_timerID);
     return () => {};
   }, [state.isGameRunning, state.boardStatus]);
 
   return (
-    <div>
+    <div data-testid={"App"}>
       <Header>Game of life</Header>
       <Board boardStatus={state.boardStatus} />
       <GameStatus
