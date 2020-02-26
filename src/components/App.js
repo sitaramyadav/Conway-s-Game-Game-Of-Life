@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Board } from "./Board";
-import { nextStep } from "./nextStep";
+import { getFutuerGeneration } from "./nextStep";
 
 import { newBoardStatus } from "./getNewBoard";
 
@@ -40,7 +40,7 @@ const App = () => {
   const handleStep = () => {
     setState({
       ...state,
-      boardStatus: nextStep(state.boardStatus),
+      boardStatus: getFutuerGeneration(state.boardStatus),
       generation: state.generation + 1
     });
   };

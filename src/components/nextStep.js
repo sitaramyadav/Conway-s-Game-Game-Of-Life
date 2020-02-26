@@ -1,6 +1,13 @@
-import { ROWS, COLOMS, RELATIVE_NEGHBOUR } from "../constants";
+import {
+  ROWS,
+  COLOMS,
+  RELATIVE_NEGHBOUR,
+  LIMIT_FOR_LONELINESS,
+  LIMIT_FOR_BORN,
+  LIMIT_FOR_CROWDED
+} from "../constants";
 
-export const nextStep = presentGeneration => {
+export const getFutuerGeneration = presentGeneration => {
   const futureGeneration = JSON.parse(JSON.stringify(presentGeneration));
 
   for (let r = 0; r < ROWS; r++) {
@@ -23,7 +30,7 @@ export const nextStep = presentGeneration => {
   return futureGeneration;
 };
 function canBornInTheNextGeneration(countOfLiveNeighbours) {
-  return countOfLiveNeighbours === 3;
+  return countOfLiveNeighbours === LIMIT_FOR_BORN;
 }
 
 function canDieInTheNextGeneration(countOfLiveNeighbours) {
@@ -33,11 +40,11 @@ function canDieInTheNextGeneration(countOfLiveNeighbours) {
 }
 
 function isCrowded(totalLiveNeighbors) {
-  return totalLiveNeighbors > 3;
+  return totalLiveNeighbors >= LIMIT_FOR_CROWDED;
 }
 
 function isLoneliness(totalLiveNeighbors) {
-  return totalLiveNeighbors < 2;
+  return totalLiveNeighbors < LIMIT_FOR_LONELINESS;
 }
 
 function countLiveNeighbours(presentGeneration, r, c) {
@@ -45,7 +52,6 @@ function countLiveNeighbours(presentGeneration, r, c) {
     const x = r + relativeNeghbour[0];
     const y = c + relativeNeghbour[1];
     const isNeighborOnBoard = isPointOnTheGrid(x, y);
-    /* No need to count more than 4 alive neighbors due to rules */
     if (
       canIcreamentLiveNeighbours(countOfLiveNeighbours, isNeighborOnBoard, x, y)
     ) {
@@ -61,6 +67,8 @@ function countLiveNeighbours(presentGeneration, r, c) {
     x,
     y
   ) {
+    /* No need to count more than 4 alive neighbors due to rules */
+
     return (
       countOfLiveNeighbours < 4 &&
       isNeighborOnBoard &&
