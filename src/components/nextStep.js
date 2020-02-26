@@ -1,14 +1,16 @@
+import { ROWS, COLOMS, RELATIVE_NEGHBOUR, LIMIT_FOR_BORN } from "../constants";
+
 import {
-  ROWS,
-  COLOMS,
-  RELATIVE_NEGHBOUR,
-  LIMIT_FOR_LONELINESS,
-  LIMIT_FOR_BORN,
-  LIMIT_FOR_CROWDED
-} from "../constants";
+  isCrowded,
+  isLoneliness,
+  isLiveCell,
+  isDeadCell,
+  isPointOnTheGrid,
+  getDeepClone
+} from "../utils/util";
 
 export const getFutuerGeneration = presentGeneration => {
-  const futureGeneration = JSON.parse(JSON.stringify(presentGeneration));
+  const futureGeneration = getDeepClone(presentGeneration);
 
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLOMS; c++) {
@@ -39,14 +41,6 @@ function canDieInTheNextGeneration(countOfLiveNeighbours) {
   );
 }
 
-function isCrowded(totalLiveNeighbors) {
-  return totalLiveNeighbors >= LIMIT_FOR_CROWDED;
-}
-
-function isLoneliness(totalLiveNeighbors) {
-  return totalLiveNeighbors < LIMIT_FOR_LONELINESS;
-}
-
 function countLiveNeighbours(presentGeneration, r, c) {
   return RELATIVE_NEGHBOUR.reduce((countOfLiveNeighbours, relativeNeghbour) => {
     const x = r + relativeNeghbour[0];
@@ -75,16 +69,4 @@ function countLiveNeighbours(presentGeneration, r, c) {
       isLiveCell(presentGeneration, x, y)
     );
   }
-}
-
-function isLiveCell(boardStatus, x, y) {
-  return boardStatus[x][y];
-}
-
-function isDeadCell(boardStatus, r, c) {
-  return !isLiveCell(boardStatus, r, c);
-}
-
-function isPointOnTheGrid(x, y) {
-  return x >= 0 && x < ROWS && y >= 0 && y < COLOMS;
 }
