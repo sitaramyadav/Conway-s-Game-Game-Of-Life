@@ -1,5 +1,5 @@
 import { ROWS, COLOMS } from "../constants";
-const isAlive = () => Math.random() < 0.7;
+const isAlive = () => Math.random() > 0.9;
 export const newBoardStatus = () => {
   const grid = [];
   for (let r = 0; r < ROWS; r++) {
