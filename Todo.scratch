@@ -16,6 +16,16 @@
     5. style the table as it is looking right now.
 
 4. Add the generate next generation 
+5. Refactore 
+    1. Naming needs to be close to domain.
+    2. condion can be extracted in a function
+        1. isAlive
+        1. isDead
+    3. grid can be extracted as cell at point
+6. Grid can be an object
+7   1. Grid can be created with given row, and colom.
+    2. Grid can have next fucntion.
+        grid.next() should return next generation.
     
 
 
