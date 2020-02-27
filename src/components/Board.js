@@ -35,5 +35,5 @@ export const Board = ({ boardStatus }) => {
     );
   };
 
-  return <BoardStyle>{renderRow()}</BoardStyle>;
+  return <BoardStyle data-testid={"Board"}>{renderRow()}</BoardStyle>;
 };

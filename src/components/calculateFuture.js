@@ -3,7 +3,7 @@ import { ROWS, COLOMS } from "../constants";
 import {
   isDeadCell,
   getDeepClone,
-  countLiveNeighbours,
+  countAliveNeighbours,
   canBornInTheNextGeneration,
   canDieInTheNextGeneration
 } from "../utils/util";
@@ -13,17 +13,17 @@ export const getFutuerGeneration = presentGeneration => {
 
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLOMS; c++) {
-      const countOfLiveNeighbours = countLiveNeighbours(
+      const countOfAliveNeighbours = countAliveNeighbours(
         presentGeneration,
         r,
         c
       );
 
       if (isDeadCell(presentGeneration, r, c)) {
-        if (canBornInTheNextGeneration(countOfLiveNeighbours))
+        if (canBornInTheNextGeneration(countOfAliveNeighbours))
           futureGeneration[r][c] = true; // true mean it can born
       } else {
-        if (canDieInTheNextGeneration(countOfLiveNeighbours))
+        if (canDieInTheNextGeneration(countOfAliveNeighbours))
           futureGeneration[r][c] = false; // false means it can die
       }
     }

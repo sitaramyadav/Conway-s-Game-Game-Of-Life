@@ -1,9 +1,9 @@
-import { isLiveCell, isDeadCell } from "./util";
+import { isAliveCell, isDeadCell } from "./util";
 
 describe("isLiveCell", () => {
   it("should check and return true if a cell is true", () => {
     const gridOnCell = [[false, true]];
-    const isLive = isLiveCell(gridOnCell, 0, 1);
+    const isLive = isAliveCell(gridOnCell, 0, 1);
     expect(isLive).toEqual(true);
   });
 

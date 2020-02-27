@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import App from "./App";
 // import "@testing-library/jest-dom/extend-expect";
 
@@ -8,5 +8,6 @@ describe("App", () => {
     const { queryByTestId } = render(<App />);
 
     expect(queryByTestId("App")).toBeInTheDocument();
+    expect(queryByTestId).toMatchSnapshot();
   });
 });

@@ -10,12 +10,12 @@ import {
 export function getDeepClone(presentGeneration) {
   return JSON.parse(JSON.stringify(presentGeneration));
 }
-export function isLiveCell(boardStatus, x, y) {
+export function isAliveCell(boardStatus, x, y) {
   return boardStatus[x][y];
 }
 
 export function isDeadCell(boardStatus, r, c) {
-  return !isLiveCell(boardStatus, r, c);
+  return !isAliveCell(boardStatus, r, c);
 }
 
 export function isPointOnTheGrid(x, y) {
@@ -30,38 +30,41 @@ export function isLoneliness(totalLiveNeighbors) {
   return totalLiveNeighbors < LIMIT_FOR_LONELINESS;
 }
 
-export function countLiveNeighbours(presentGeneration, r, c) {
-  return RELATIVE_NEGHBOUR.reduce((countOfLiveNeighbours, relativeNeghbour) => {
-    const x = r + relativeNeghbour[0];
-    const y = c + relativeNeghbour[1];
-    const isNeighborOnBoard = isPointOnTheGrid(x, y);
-    if (
-      canIcreamentLiveNeighbours(
-        presentGeneration,
-        countOfLiveNeighbours,
-        isNeighborOnBoard,
-        x,
-        y
-      )
-    ) {
-      return countOfLiveNeighbours + 1;
-    } else {
-      return countOfLiveNeighbours;
-    }
-  }, 0);
+export function countAliveNeighbours(presentGeneration, r, c) {
+  return RELATIVE_NEGHBOUR.reduce(
+    (countOfAliveNeighbours, relativeNeghbour) => {
+      const x = r + relativeNeghbour[0];
+      const y = c + relativeNeghbour[1];
+      const isNeighborOnBoard = isPointOnTheGrid(x, y);
+      if (
+        canIcreamentAliveNeighbours(
+          presentGeneration,
+          countOfAliveNeighbours,
+          isNeighborOnBoard,
+          x,
+          y
+        )
+      ) {
+        return countOfAliveNeighbours + 1;
+      } else {
+        return countOfAliveNeighbours;
+      }
+    },
+    0
+  );
 }
 
-function canIcreamentLiveNeighbours(
+function canIcreamentAliveNeighbours(
   presentGeneration,
-  countOfLiveNeighbours,
+  countOfAliveNeighbours,
   isNeighborOnBoard,
   x,
   y
 ) {
   return (
-    countOfLiveNeighbours < 4 &&
+    countOfAliveNeighbours < 4 &&
     isNeighborOnBoard &&
-    isLiveCell(presentGeneration, x, y)
+    isAliveCell(presentGeneration, x, y)
   );
 }
 
