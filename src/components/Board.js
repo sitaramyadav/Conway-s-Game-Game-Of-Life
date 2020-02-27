@@ -13,8 +13,6 @@ const BoardStyle = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  // flex-wrap: wrap;
-  box-sizing: border-box;
 `;
 
 export const Board = ({ boardStatus }) => {
