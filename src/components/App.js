@@ -27,6 +27,13 @@ const GameStatus = styled.button`
   top: 400px;
   right: 50px;
 `;
+const Generation = styled.p`
+  position: absolute;
+  top: 320px;
+  right: 32px;
+  font-size: 20px;
+  font-weight: bold;
+`;
 
 const App = () => {
   const [state, setState] = useState({
@@ -64,6 +71,7 @@ const App = () => {
       >
         {(state.isGameRunning && "START") || "STOP"}
       </GameStatus>
+      <Generation>Generation: {state.generation}</Generation>
     </div>
   );
 };
