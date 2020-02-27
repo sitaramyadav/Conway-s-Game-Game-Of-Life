@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Board } from "./Board";
 import { getFutuerGeneration } from "./nextStep";
-import { newBoardStatus } from "./getNewBoard";
+import { getFirstGeneration } from "./firstGeneration";
 
 const Header = styled.header`
   margin: 0;
@@ -38,8 +38,8 @@ const Generation = styled.p`
 
 const App = () => {
   const [state, setState] = useState({
-    boardStatus: newBoardStatus(),
-    generation: 0,
+    presentGeneration: getFirstGeneration(),
+    generationCount: 0,
     isGameRunning: false,
     speed: 500
   });
@@ -48,8 +48,8 @@ const App = () => {
   const handleFutureGeneration = () => {
     setState({
       ...state,
-      boardStatus: getFutuerGeneration(state.boardStatus),
-      generation: state.generation + 1
+      presentGeneration: getFutuerGeneration(state.presentGeneration),
+      generationCount: state.generationCount + 1
     });
   };
 
@@ -64,7 +64,7 @@ const App = () => {
     return () => {
       clearInterval(timerID);
     };
-  }, [state.isGameRunning, state.boardStatus]);
+  }, [state.isGameRunning, state.presentGeneration]);
 
   useEffect(() => {
     if (!state.isGameRunning) {
@@ -80,7 +80,7 @@ const App = () => {
       <Header>
         <h1>Game of life</h1>
       </Header>
-      <Board boardStatus={state.boardStatus} />
+      <Board boardStatus={state.presentGeneration} />
       <GameStatus
         onClick={() =>
           setState({ ...state, isGameRunning: !state.isGameRunning })
@@ -89,7 +89,7 @@ const App = () => {
       >
         {state.isGameRunning ? "Pause" : "Presume"}
       </GameStatus>
-      <Generation>Generation: {state.generation}</Generation>
+      <Generation>Generation: {state.generationCount}</Generation>
     </div>
   );
 };

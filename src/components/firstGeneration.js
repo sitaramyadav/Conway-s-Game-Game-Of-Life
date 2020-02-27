@@ -1,6 +1,6 @@
 import { ROWS, COLOMS } from "../constants";
 const isAlive = () => Math.random() > 0.9;
-export const newBoardStatus = () => {
+export const getFirstGeneration = () => {
   const grid = [];
   for (let r = 0; r < ROWS; r++) {
     grid[r] = [];
