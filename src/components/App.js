@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Board } from "./Board";
+import Input from "./common/Input";
 import { getFutuerGeneration } from "./calculateFuture";
 import { getFirstGeneration } from "./firstGeneration";
+import { ROWS, COLOMS } from "../constants";
 
 const Header = styled.header`
   margin: 0;
@@ -41,9 +43,21 @@ const App = () => {
     presentGeneration: getFirstGeneration(),
     generationCount: 0,
     isGameRunning: false,
-    speed: 500
+    speed: 500,
+    rows: ROWS,
+    coloms: COLOMS
   });
+
   const [timerID, setTimerID] = useState(null);
+
+  function handleChange(event) {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  }
 
   const handleFutureGeneration = () => {
     setState({
@@ -80,7 +94,27 @@ const App = () => {
       <Header>
         <h1>Game of life</h1>
       </Header>
-      <Board boardStatus={state.presentGeneration} />
+      <Input
+        type="number"
+        name="rows"
+        label="Rows"
+        placeholder="Rows"
+        onChange={handleChange}
+        value={state.rows}
+      />
+      <Input
+        type="number"
+        name="coloms"
+        label="Colums"
+        placeholder="Colums"
+        value={state.coloms}
+        onChange={handleChange}
+      />
+      <Board
+        rows={state.rows}
+        coloms={state.coloms}
+        presentGeneration={state.presentGeneration}
+      />
       <GameStatus
         onClick={() =>
           setState({ ...state, isGameRunning: !state.isGameRunning })

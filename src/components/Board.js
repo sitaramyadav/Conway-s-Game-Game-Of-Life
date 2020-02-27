@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Square } from "./Square";
-import { ROWS, COLOMS } from "../constants";
 
 const BoardStyle = styled.main`
   padding: 5px 5px;
@@ -15,14 +14,18 @@ const BoardStyle = styled.main`
   align-items: center;
 `;
 
-export const Board = ({ boardStatus }) => {
+export const Board = ({ rows, coloms, presentGeneration }) => {
   const renderRow = (tr = []) => {
-    if (boardStatus && boardStatus[0]) {
-      for (let row = 0; row < ROWS; row++) {
+    if (presentGeneration && presentGeneration[0]) {
+      for (let row = 0; row < rows; row++) {
         const td = [];
-        for (let colom = 0; colom < COLOMS; colom++) {
+        for (let colom = 0; colom < coloms; colom++) {
+          // if (presentGeneration[row] && presentGeneration[row][colom])
           td.push(
-            <Square key={`${row},${colom}`} isAlive={boardStatus[row][colom]} />
+            <Square
+              key={`${row},${colom}`}
+              isAlive={presentGeneration[row][colom]}
+            />
           );
         }
         tr.push(<tr key={row}>{td}</tr>);
