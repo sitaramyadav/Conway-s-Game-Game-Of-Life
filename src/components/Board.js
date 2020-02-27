@@ -19,14 +19,16 @@ const BoardStyle = styled.main`
 
 export const Board = ({ boardStatus }) => {
   const renderRow = (tr = []) => {
-    for (let row = 0; row < ROWS; row++) {
-      const td = [];
-      for (let colom = 0; colom < COLOMS; colom++) {
-        td.push(
-          <Square key={`${row},${colom}`} isAlive={boardStatus[row][colom]} />
-        );
+    if (boardStatus && boardStatus[0]) {
+      for (let row = 0; row < ROWS; row++) {
+        const td = [];
+        for (let colom = 0; colom < COLOMS; colom++) {
+          td.push(
+            <Square key={`${row},${colom}`} isAlive={boardStatus[row][colom]} />
+          );
+        }
+        tr.push(<tr key={row}>{td}</tr>);
       }
-      tr.push(<tr key={row}>{td}</tr>);
     }
     return (
       <table>

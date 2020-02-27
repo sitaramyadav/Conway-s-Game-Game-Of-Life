@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Board } from "./Board";
 import { getFutuerGeneration } from "./nextStep";
-
 import { newBoardStatus } from "./getNewBoard";
 
 const Header = styled.header`
@@ -16,6 +15,7 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 24px;
 `;
 const GameStatus = styled.button`
   width: 120px;
@@ -25,12 +25,13 @@ const GameStatus = styled.button`
   color: white;
   position: absolute;
   top: 400px;
-  right: 50px;
+  right: 200px;
+  cursor: pointer;
 `;
 const Generation = styled.p`
   position: absolute;
   top: 320px;
-  right: 32px;
+  right: 184px;
   font-size: 20px;
   font-weight: bold;
 `;
@@ -53,23 +54,40 @@ const App = () => {
   };
 
   useEffect(() => {
-    clearInterval(timerID);
-    const _timerID = setInterval(() => {
-      handleFutureGeneration();
-    }, 500);
-    setTimerID(_timerID);
-    return () => {};
+    if (state.isGameRunning) {
+      const _timerID = setInterval(() => {
+        handleFutureGeneration();
+      }, 500);
+      setTimerID(_timerID);
+    }
+
+    return () => {
+      clearInterval(timerID);
+    };
   }, [state.isGameRunning, state.boardStatus]);
+
+  useEffect(() => {
+    if (!state.isGameRunning) {
+      handleFutureGeneration();
+    }
+    return () => {
+      clearInterval(timerID);
+    };
+  }, [state.isGameRunning]);
 
   return (
     <div data-testid={"App"}>
-      <Header>Game of life</Header>
+      <Header>
+        <h1>Game of life</h1>
+      </Header>
       <Board boardStatus={state.boardStatus} />
       <GameStatus
-        onClick={() => setState(!state.isGameRunning)}
+        onClick={() =>
+          setState({ ...state, isGameRunning: !state.isGameRunning })
+        }
         gameStatus={state.isGameRunning}
       >
-        {(state.isGameRunning && "START") || "STOP"}
+        {state.isGameRunning ? "Pause" : "Presume"}
       </GameStatus>
       <Generation>Generation: {state.generation}</Generation>
     </div>
