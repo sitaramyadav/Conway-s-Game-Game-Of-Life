@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Board } from "./Board";
-import { getFutuerGeneration } from "./nextStep";
+import { getFutuerGeneration } from "./calculateFuture";
 import { getFirstGeneration } from "./firstGeneration";
 
 const Header = styled.header`

@@ -2,7 +2,9 @@ import {
   LIMIT_FOR_CROWDED,
   LIMIT_FOR_LONELINESS,
   ROWS,
-  COLOMS
+  COLOMS,
+  RELATIVE_NEGHBOUR,
+  LIMIT_FOR_BORN
 } from "../constants";
 
 export function getDeepClone(presentGeneration) {
@@ -26,4 +28,49 @@ export function isCrowded(totalLiveNeighbors) {
 
 export function isLoneliness(totalLiveNeighbors) {
   return totalLiveNeighbors < LIMIT_FOR_LONELINESS;
+}
+
+export function countLiveNeighbours(presentGeneration, r, c) {
+  return RELATIVE_NEGHBOUR.reduce((countOfLiveNeighbours, relativeNeghbour) => {
+    const x = r + relativeNeghbour[0];
+    const y = c + relativeNeghbour[1];
+    const isNeighborOnBoard = isPointOnTheGrid(x, y);
+    if (
+      canIcreamentLiveNeighbours(
+        presentGeneration,
+        countOfLiveNeighbours,
+        isNeighborOnBoard,
+        x,
+        y
+      )
+    ) {
+      return countOfLiveNeighbours + 1;
+    } else {
+      return countOfLiveNeighbours;
+    }
+  }, 0);
+}
+
+function canIcreamentLiveNeighbours(
+  presentGeneration,
+  countOfLiveNeighbours,
+  isNeighborOnBoard,
+  x,
+  y
+) {
+  return (
+    countOfLiveNeighbours < 4 &&
+    isNeighborOnBoard &&
+    isLiveCell(presentGeneration, x, y)
+  );
+}
+
+export function canBornInTheNextGeneration(countOfLiveNeighbours) {
+  return countOfLiveNeighbours === LIMIT_FOR_BORN;
+}
+
+export function canDieInTheNextGeneration(countOfLiveNeighbours) {
+  return (
+    isLoneliness(countOfLiveNeighbours) || isCrowded(countOfLiveNeighbours)
+  );
 }

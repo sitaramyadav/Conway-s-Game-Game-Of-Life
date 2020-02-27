@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch --verbose",
+    "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "build": "rm -rf dist && webpack --mode development --config webpack.dev.config.js",
     "start": "node server.js"
